@@ -49,9 +49,9 @@ class PK786App extends StatelessWidget {
 }
 
 // ==========================================================
-// TOAST BANNER HELPER (3 SECONDS)
+// TOAST BANNER HELPER (Custom Duration support)
 // ==========================================================
-void showBanner(BuildContext context, String message, {bool isWin = false}) {
+void showBanner(BuildContext context, String message, {bool isWin = false, Duration duration = const Duration(seconds: 3)}) {
   OverlayEntry? entry;
   entry = OverlayEntry(
     builder: (context) => Positioned(
@@ -87,8 +87,11 @@ void showBanner(BuildContext context, String message, {bool isWin = false}) {
     ),
   );
   Overlay.of(context).insert(entry);
-  Future.delayed(const Duration(seconds: 3), () => entry?.remove());
+  
+  // Yahan 3 seconds ki jagah variable `duration` pass kar diya hai
+  Future.delayed(duration, () => entry?.remove());
 }
+
 
 // ==========================================================
 // PRO PROMINENT RANDOM WINNER BANNER (EVERY 60 SECONDS)
@@ -927,7 +930,9 @@ class _WithdrawTabState extends State<WithdrawTab> {
           widget.onBalanceUpdated(remainingCoins);
           _amountController.clear();
           _accController.clear();
-          showBanner(context, 'Your withdrawn amount will come in your account under 4 hours.', isWin: true);
+          showBanner(
+          context, 'Your withdrawn amount will come in your account under 4 hours.', isWin: true, duration: const Duration(seconds: 5),);
+
         } else {
           showBanner(context, data['message'] ?? 'Withdrawal failed.');
         }
