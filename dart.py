@@ -931,7 +931,7 @@ class _WithdrawTabState extends State<WithdrawTab> {
           _amountController.clear();
           _accController.clear();
           showBanner(
-          context, 'Your withdrawn amount will come in your account under 4 hours.', isWin: true, duration: const Duration(seconds: 5),);
+          context, 'Your withdrawn amount will come in your account under 4 hours.', isWin: true, duration: const Duration(seconds: 6),);
 
         } else {
           showBanner(context, data['message'] ?? 'Withdrawal failed.');
@@ -1296,8 +1296,7 @@ class _AviatorGameState extends State<AviatorGame> with SingleTickerProviderStat
   }
 
   void _cashOut() {
-    if (!isPlaying || !betPlaced) return;
-    _endRound(crashed: false);
+    //laura
   }
 
   void _endRound({required bool crashed}) {
